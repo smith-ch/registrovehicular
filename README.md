@@ -1,24 +1,17 @@
 # selenium-webdriver
 
-Selenium is a browser automation library. Most often used for testing
-web-applications, Selenium may be used for any task that requires automating
-interaction with the browser.
+Selenium es una biblioteca de automatización de navegadores. Usada con mayor frecuencia para probar aplicaciones web, Selenium puede ser utilizada para cualquier tarea que requiera automatizar la interacción con el navegador.
 
-## Installation
+## Instalación
 
-Selenium may be installed via npm with
+Selenium puede instalarse a través de npm con:
 
-    npm install selenium-webdriver
+  npm install selenium-webdriver
 
-You will need to download additional components to work with each of the major
-browsers. The drivers for Chrome, Firefox, and Microsoft's IE and Edge web
-browsers are all standalone executables that should be placed on your system
-[PATH]. Apple's safaridriver (v10 and above) can be found at the
-following path – /usr/bin/safaridriver. To enable automation on safari,
-you need to run command `safaridriver --enable`.
+Necesitarás descargar componentes adicionales para trabajar con cada uno de los principales navegadores. Los controladores para Chrome, Firefox y los navegadores IE y Edge de Microsoft son ejecutables independientes que deben colocarse en el [PATH] de tu sistema. El `safaridriver` de Apple (v10 y superior) se encuentra en la siguiente ruta: `/usr/bin/safaridriver`. Para habilitar la automatización en Safari, necesitas ejecutar el comando `safaridriver --enable`.
 
-| Browser           | Component                        |
-| :---------------- | :------------------------------- |
+| Navegador         | Componente                        |
+| :---------------- | :-------------------------------- |
 | Chrome            | [chromedriver(.exe)][chrome]     |
 | Internet Explorer | [IEDriverServer.exe][release]    |
 | Edge              | [MicrosoftWebDriver.msi][edge]   |
@@ -26,10 +19,9 @@ you need to run command `safaridriver --enable`.
 | Opera             | [operadriver(.exe)][operadriver] |
 | Safari            | [safaridriver]                   |
 
-## Usage
+## Uso
 
-The sample below and others are included in the `example` directory. You may
-also find the tests for selenium-webdriver informative.
+El siguiente ejemplo y otros están incluidos en el directorio `example`. También puedes encontrar útiles las pruebas de selenium-webdriver.
 
 ```javascript
 const { Builder, Browser, By, Key, until } = require('selenium-webdriver')
@@ -37,21 +29,18 @@ const { Builder, Browser, By, Key, until } = require('selenium-webdriver')
 ;(async function example() {
   let driver = await new Builder().forBrowser(Browser.FIREFOX).build()
   try {
-    await driver.get('https://www.google.com/ncr')
-    await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN)
-    await driver.wait(until.titleIs('webdriver - Google Search'), 1000)
+  await driver.get('https://www.google.com/ncr')
+  await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN)
+  await driver.wait(until.titleIs('webdriver - Google Search'), 1000)
   } finally {
-    await driver.quit()
+  await driver.quit()
   }
 })()
 ```
 
-### Using the Builder API
+### Usando la API de Builder
 
-The `Builder` class is your one-stop shop for configuring new WebDriver
-instances. Rather than clutter your code with branches for the various browsers,
-the builder lets you set all options in one flow. When you call
-`Builder#build()`, all options irrelevant to the selected browser are dropped:
+La clase `Builder` es tu herramienta principal para configurar nuevas instancias de WebDriver. En lugar de llenar tu código con ramas para los diferentes navegadores, el constructor te permite configurar todas las opciones en un solo flujo. Cuando llamas a `Builder#build()`, todas las opciones irrelevantes para el navegador seleccionado se descartan:
 
 ```javascript
 const webdriver = require('selenium-webdriver')
@@ -65,36 +54,22 @@ let driver = new webdriver.Builder()
   .build()
 ```
 
-Why would you want to configure options irrelevant to the target browser? The
-`Builder`'s API defines your _default_ configuration. You can change the target
-browser at runtime through the `SELENIUM_BROWSER` environment variable. For
-example, the `example/google_search.js` script is configured to run against
-Firefox. You can run the example against other browsers just by changing the
-runtime environment
+¿Por qué querrías configurar opciones irrelevantes para el navegador objetivo? La API de `Builder` define tu configuración _predeterminada_. Puedes cambiar el navegador objetivo en tiempo de ejecución a través de la variable de entorno `SELENIUM_BROWSER`. Por ejemplo, el script `example/google_search.js` está configurado para ejecutarse en Firefox. Puedes ejecutar el ejemplo en otros navegadores simplemente cambiando el entorno en tiempo de ejecución:
 
-    # cd node_modules/selenium-webdriver
-    node example/google_search
-    SELENIUM_BROWSER=chrome node example/google_search
-    SELENIUM_BROWSER=safari node example/google_search
+  # cd node_modules/selenium-webdriver
+  node example/google_search
+  SELENIUM_BROWSER=chrome node example/google_search
+  SELENIUM_BROWSER=safari node example/google_search
 
-### The Standalone Selenium Server
+### El Servidor Independiente de Selenium
 
-The standalone Selenium Server acts as a proxy between your script and the
-browser-specific drivers. The server may be used when running locally, but it's
-not recommend as it introduces an extra hop for each request and will slow
-things down. The server is required, however, to use a browser on a remote host
-(most browser drivers, like the IEDriverServer, do not accept remote
-connections).
+El Servidor Independiente de Selenium actúa como un proxy entre tu script y los controladores específicos del navegador. El servidor puede usarse al ejecutar localmente, pero no se recomienda ya que introduce un salto adicional para cada solicitud y ralentizará las cosas. Sin embargo, el servidor es necesario para usar un navegador en un host remoto (la mayoría de los controladores de navegador, como el IEDriverServer, no aceptan conexiones remotas).
 
-To use the Selenium Server, you will need to install the
-[JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and
-download the latest server from [Selenium][release]. Once downloaded, run the
-server with
+Para usar el Servidor de Selenium, necesitarás instalar el [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) y descargar el servidor más reciente desde [Selenium][release]. Una vez descargado, ejecuta el servidor con:
 
-    java -jar selenium-server-4.4.0.jar standalone
+  java -jar selenium-server-4.4.0.jar standalone
 
-You may configure your tests to run against a remote server through the Builder
-API:
+Puedes configurar tus pruebas para ejecutarse contra un servidor remoto a través de la API de Builder:
 
 ```javascript
 let driver = new webdriver.Builder()
@@ -103,120 +78,80 @@ let driver = new webdriver.Builder()
   .build()
 ```
 
-Or change the Builder's configuration at runtime with the `SELENIUM_REMOTE_URL`
-environment variable:
+O cambiar la configuración de Builder en tiempo de ejecución con la variable de entorno `SELENIUM_REMOTE_URL`:
 
-    SELENIUM_REMOTE_URL="http://localhost:4444/wd/hub" node script.js
+  SELENIUM_REMOTE_URL="http://localhost:4444/wd/hub" node script.js
 
-You can experiment with these options using the `example/google_search.js`
-script provided with `selenium-webdriver`.
+Puedes experimentar con estas opciones usando el script `example/google_search.js` proporcionado con `selenium-webdriver`.
 
-## Documentation
+## Documentación
 
-API documentation is available online from the [Selenium project][api].
-Additional resources include
+La documentación de la API está disponible en línea desde el [proyecto Selenium][api]. Recursos adicionales incluyen:
 
-- the #selenium channel on freenode IRC
-- the [selenium-users@googlegroups.com][users] list
-- [SeleniumHQ](https://selenium.dev/documentation/) documentation
+- el canal #selenium en IRC freenode
+- la lista [selenium-users@googlegroups.com][users]
+- la documentación de [SeleniumHQ](https://selenium.dev/documentation/)
 
-## Contributing
+## Contribuir
 
-Contributions are accepted either through [GitHub][gh] pull requests or patches
-via the [Selenium issue tracker][issues].
+Se aceptan contribuciones a través de solicitudes de extracción en [GitHub][gh] o parches mediante el [rastreador de problemas de Selenium][issues].
 
-## Node Support Policy
+## Política de Soporte para Node
 
-Each version of selenium-webdriver will support the latest _semver-minor_
-version of the [LTS] and stable Node releases. All _semver-major_ &
-_semver-minor_ versions between the LTS and stable release will have "best
-effort" support. Following a Selenium release, any _semver-minor_ Node releases
-will also have "best effort" support. Releases older than the latest LTS,
-_semver-major_ releases, and all unstable release branches (e.g. "v.Next")
-are considered strictly unsupported.
+Cada versión de selenium-webdriver soportará la última versión _semver-minor_ de las versiones LTS y estables de Node. Todas las versiones _semver-major_ y _semver-minor_ entre la versión LTS y la estable tendrán soporte de "mejor esfuerzo". Después de un lanzamiento de Selenium, cualquier versión _semver-minor_ de Node también tendrá soporte de "mejor esfuerzo". Las versiones anteriores a la última LTS, las versiones _semver-major_ y todas las ramas de lanzamiento inestables (por ejemplo, "v.Next") se consideran estrictamente no soportadas.
 
-For example, suppose the current LTS and stable releases are v14.20.0 and
-v18.8.0,
-respectively. Then a Selenium release would have the following support levels:
+Por ejemplo, supongamos que las versiones actuales LTS y estables son v14.20.0 y v18.8.0, respectivamente. Entonces, un lanzamiento de Selenium tendría los siguientes niveles de soporte:
 
-|  Version  |    Support    |
-| :-------: | :-----------: |
-| <= 14.19  | _unsupported_ |
-|  14.20.0  |   supported   |
-|  18.0-7   |  best effort  |
-|  18.8.0   |   supported   |
-| >= 18.8.0 |  best effort  |
-|  v.Next   | _unsupported_ |
+|  Versión  |     Soporte     |
+| :-------: | :-------------: |
+| <= 14.19  | _no soportado_  |
+|  14.20.0  |    soportado    |
+|  18.0-7   | mejor esfuerzo  |
+|  18.8.0   |    soportado    |
+| >= 18.8.0 | mejor esfuerzo  |
+|  v.Next   | _no soportado_  |
 
-### Support Level Definitions
+### Definiciones de Niveles de Soporte
 
-- _supported:_ A selenium-webdriver release will be API compatible with the
-  platform API, without the use of runtime flags.
+- _soportado:_ Una versión de selenium-webdriver será compatible con la API de la plataforma, sin el uso de banderas de tiempo de ejecución.
 
-- _best effort:_ Bugs will be investigated as time permits. API compatibility is
-  only guaranteed where required by a _supported_ release. This effectively
-  means the adoption of new JS features, such as ES2015 modules, will depend
-  on what is supported in Node's LTS.
+- _mejor esfuerzo:_ Los errores serán investigados según el tiempo lo permita. La compatibilidad con la API solo está garantizada donde se requiera por una versión _soportada_. Esto significa que la adopción de nuevas características de JS, como los módulos ES2015, dependerá de lo que sea compatible en el LTS de Node.
 
-- _unsupported:_ Bug submissions will be closed as will-not-fix and API
-  compatibility is not guaranteed.
+- _no soportado:_ Los informes de errores serán cerrados como no solucionables y la compatibilidad con la API no está garantizada.
 
-### Projected Support Schedule
+### Calendario de Soporte Proyectado
 
-If Node releases a new [LTS] each October and a new major version every 6
-months, the support window for selenium-webdriver will be roughly:
+Si Node lanza un nuevo [LTS] cada octubre y una nueva versión principal cada 6 meses, la ventana de soporte para selenium-webdriver será aproximadamente:
 
-| Release |     Status      | END-OF-LIFE |
-| :-----: | :-------------: | :---------: |
-|  v14.x  | Maintenance LTS | 2023-04-30  |
-|  v16.x  |   Active LTS    | 2023-09-11  |
-|  v18.x  |     Current     | 2025-04-30  |
-|  v19.x  |     Pending     | 2023-06-01  |
-|   v20   |     Pending     | 2026-04-30  |
+| Lanzamiento |      Estado      | FIN DE VIDA |
+| :---------: | :--------------: | :---------: |
+|   v14.x     | LTS de Mantenimiento | 2023-04-30  |
+|   v16.x     |    LTS Activo    | 2023-09-11  |
+|   v18.x     |     Actual       | 2025-04-30  |
+|   v19.x     |     Pendiente    | 2023-06-01  |
+|    v20      |     Pendiente    | 2026-04-30  |
 
-## Issues
+## Problemas
 
-Please report any issues using the [Selenium issue tracker][issues]. When using
-the issue tracker
+Por favor, informa cualquier problema utilizando el [rastreador de problemas de Selenium][issues]. Al usar el rastreador de problemas:
 
-- **Do** include a detailed description of the problem.
-- **Do** include a link to a [gist](http://gist.github.com/) with any
-  interesting stack traces/logs (you may also attach these directly to the bug
-  report).
-- **Do** include a [reduced test case][reduction]. Reporting "unable to find
-  element on the page" is _not_ a valid report - there's nothing for us to
-  look into. Expect your bug report to be closed if you do not provide enough
-  information for us to investigate.
-- **Do not** use the issue tracker to submit basic help requests. All help
-  inquiries should be directed to the [user forum][users] or #selenium IRC
-  channel.
-- **Do not** post empty "I see this too" or "Any updates?" comments. These
-  provide no additional information and clutter the log.
-- **Do not** report regressions on closed bugs as they are not actively
-  monitored for updates (especially bugs that are >6 months old). Please open a
-  new issue and reference the original bug in your report.
+- **Haz** incluir una descripción detallada del problema.
+- **Haz** incluir un enlace a un [gist](http://gist.github.com/) con cualquier traza de pila/registros interesantes (también puedes adjuntarlos directamente al informe de errores).
+- **Haz** incluir un [caso de prueba reducido][reduction]. Informar "no se puede encontrar el elemento en la página" _no_ es un informe válido; no hay nada que podamos investigar. Espera que tu informe de error sea cerrado si no proporcionas suficiente información para que lo investiguemos.
+- **No hagas** solicitudes de ayuda básicas en el rastreador de problemas. Todas las consultas de ayuda deben dirigirse al [foro de usuarios][users] o al canal #selenium en IRC.
+- **No hagas** comentarios vacíos como "Yo también veo esto" o "¿Alguna actualización?". Estos no proporcionan información adicional y llenan el registro.
+- **No informes** regresiones en errores cerrados, ya que no se monitorean activamente para actualizaciones (especialmente errores que tienen más de 6 meses). Por favor, abre un nuevo problema y referencia el error original en tu informe.
 
-## License
+## Licencia
 
-Licensed to the Software Freedom Conservancy (SFC) under one
-or more contributor license agreements. See the NOTICE file
-distributed with this work for additional information
-regarding copyright ownership. The SFC licenses this file
-to you under the Apache License, Version 2.0 (the
-"License"); you may not use this file except in compliance
-with the License. You may obtain a copy of the License at
+Licenciado a la Software Freedom Conservancy (SFC) bajo uno o más acuerdos de licencia de contribuyentes. Consulta el archivo NOTICE distribuido con este trabajo para obtener información adicional sobre la propiedad de los derechos de autor. La SFC licencia este archivo bajo la Licencia Apache, Versión 2.0 (la "Licencia"); no puedes usar este archivo excepto en cumplimiento con la Licencia. Puedes obtener una copia de la Licencia en:
 
 http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing,
-software distributed under the License is distributed on an
-"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, either express or implied. See the License for the
-specific language governing permissions and limitations
-under the License.
+A menos que lo requiera la ley aplicable o se acuerde por escrito, el software distribuido bajo la Licencia se distribuye "TAL CUAL", SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas. Consulta la Licencia para obtener el lenguaje específico que rige los permisos y limitaciones bajo la Licencia.
 
 [LTS]: https://github.com/nodejs/LTS
-[PATH]: http://en.wikipedia.org/wiki/PATH_%28variable%29
+[PATH]: http://es.wikipedia.org/wiki/PATH_%28variable%29
 [api]: https://www.selenium.dev/selenium/docs/api/javascript/
 [chrome]: https://googlechromelabs.github.io/chrome-for-testing/#stable
 [gh]: https://github.com/SeleniumHQ/selenium/
