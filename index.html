@@ -1,133 +1,146 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Registro de Vehículos</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Registro de Vehículos</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <section id="section-sistema">
-    <nav class="navbar navbar-dark bg-dark">
-        <span class="navbar-brand mb-0 h1">Registro de Vehículos</span>
-    </nav>
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Registro de Vehículos</span>
+  </nav>
 
-    <!-- Formulario de Registro -->
-    <div id="registerForm" class="container mt-5 d-none">
-        <div class="card shadow">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Crear Cuenta</h2>
-                <div class="form-group">
-                    <input type="text" id="username" class="form-control" placeholder="Usuario">
-                </div>
-                <div class="form-group">
-                    <input type="password" id="password" class="form-control" placeholder="Contraseña">
-                </div>
-                <button id="btnRegister" class="btn btn-primary btn-block">Registrar</button>
-            </div>
+  <!-- Registro -->
+  <div id="registerForm" class="container mt-5 d-none">
+    <div class="card shadow">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Crear Cuenta</h2>
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Usuario" autocomplete="off">
         </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" autocomplete="off">
+        </div>
+        <button id="btnRegister" class="btn btn-primary btn-block">Registrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login -->
+  <div id="loginForm" class="container mt-5">
+    <div class="card shadow">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+        <div class="form-group">
+          <label for="loginUsername">Usuario</label>
+          <input type="text" id="loginUsername" name="loginUsername" class="form-control" placeholder="Usuario" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" name="loginPassword" class="form-control" placeholder="Contraseña" autocomplete="off">
+        </div>
+        <button id="btnLogin" class="btn btn-primary btn-block">Ingresar</button>
+        <button id="btnGoToRegister" class="btn btn-link btn-block">Crear nueva cuenta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulario principal -->
+  <div id="mainForm" class="container mt-4 d-none">
+
+    <!-- Datos del Vehículo -->
+    <div class="card shadow mb-4" id="vehicleForm">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Datos del Vehículo</h2>
+        <div class="row">
+          <div class="col-md-6 form-group">
+            <label for="marca">Marca</label>
+            <input type="text" id="marca" name="marca" class="form-control" placeholder="Marca" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="modelo">Modelo</label>
+            <input type="text" id="modelo" name="modelo" class="form-control" placeholder="Modelo" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="anio">Año</label>
+            <input type="number" id="anio" name="anio" class="form-control" placeholder="Año" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="color">Color</label>
+            <input type="text" id="color" name="color" class="form-control" placeholder="Color" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="placa">Placa</label>
+            <input type="text" id="placa" name="placa" class="form-control" placeholder="Placa" required>
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="tipo">Tipo</label>
+            <select id="tipo" name="tipo" class="form-control" required>
+              <option value="">Tipo de vehículo</option>
+              <option value="sedan">Sedán</option>
+              <option value="suv">SUV</option>
+              <option value="pickup">Pickup</option>
+              <option value="deportivo">Deportivo</option>
+            </select>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button id="btnLimpiar" class="btn btn-secondary">Limpiar</button>
+          <button id="btnSiguiente" class="btn btn-primary">Siguiente</button>
+        </div>
+      </div>
     </div>
 
-    <!-- Formulario de Login -->
-    <div id="loginForm" class="container mt-5">
-        <div class="card shadow">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
-                <div class="form-group">
-                    <input type="text" id="loginUsername" class="form-control" placeholder="Usuario">
-                </div>
-                <div class="form-group">
-                    <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña">
-                </div>
-                <button id="btnLogin" class="btn btn-primary btn-block">Ingresar</button>
-                <button id="btnGoToRegister" class="btn btn-link btn-block">Crear nueva cuenta</button>
-            </div>
+    <!-- Características -->
+    <div class="card shadow mb-4 d-none" id="featuresForm">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Características</h2>
+        <div class="row" id="caracteristicas"></div>
+        <div class="d-flex justify-content-between mt-4">
+          <button id="btnAtras" class="btn btn-secondary">Atrás</button>
+          <button id="btnRegistrar" class="btn btn-primary">Registrar</button>
         </div>
+      </div>
     </div>
 
-    <!-- Formulario Principal -->
-    <div id="mainForm" class="container mt-4 d-none">
-        <!-- Formulario de Datos del Vehículo -->
-        <div class="card shadow mb-4" id="vehicleForm">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Datos del Vehículo</h2>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <input type="text" id="marca" class="form-control" placeholder="Marca" required>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <input type="text" id="modelo" class="form-control" placeholder="Modelo" required>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <input type="number" id="anio" class="form-control" placeholder="Año" required>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <input type="text" id="color" class="form-control" placeholder="Color" required>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <input type="text" id="placa" class="form-control" placeholder="Placa" required>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <select id="tipo" class="form-control" required>
-                            <option value="">Tipo de vehículo</option>
-                            <option value="sedan">Sedán</option>
-                            <option value="suv">SUV</option>
-                            <option value="pickup">Pickup</option>
-                            <option value="deportivo">Deportivo</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button id="btnLimpiar" class="btn btn-secondary">Limpiar</button>
-                    <button id="btnSiguiente" class="btn btn-primary">Siguiente</button>
-                </div>
-            </div>
+    <!-- Resumen -->
+    <div class="card shadow d-none" id="resumenForm">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Resumen Final</h2>
+        <div id="resumenDetalles" class="mb-4"></div>
+        <table class="table table-bordered">
+          <thead class="thead-light">
+            <tr>
+              <th>Categoría</th>
+              <th>Característica</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCaracteristicas"></tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <button id="btnEditar" class="btn btn-warning mr-2">Editar</button>
+          <button id="btnDescargarPDF" class="btn btn-success">Descargar PDF</button>
         </div>
-
-        <!-- Selección de Características -->
-        <div class="card shadow mb-4 d-none" id="featuresForm">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Características</h2>
-                <div class="row" id="caracteristicas"></div>
-                <div class="d-flex justify-content-between mt-4">
-                    <button id="btnAtras" class="btn btn-secondary">Atrás</button>
-                    <button id="btnRegistrar" class="btn btn-primary">Registrar</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Resumen Final -->
-        <div class="card shadow d-none" id="resumenForm">
-            <div class="card-body">
-                <h2 class="card-title text-center mb-4">Resumen Final</h2>
-                <div id="resumenDetalles" class="mb-4"></div>
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Categoría</th>
-                            <th>Característica</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tablaCaracteristicas"></tbody>
-                </table>
-                <div class="d-flex justify-content-end">
-                    <button id="btnEditar" class="btn btn-warning mr-2">Editar</button>
-                    <button id="btnDescargarPDF" class="btn btn-success">Descargar PDF</button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+
+  </div>
 </section>
 
+<!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="javascript\script-jquery.js"></script>
+<script src="javascript/script-jquery.js"></script>
 </body>
 </html>

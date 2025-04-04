@@ -1,0 +1,550 @@
+{
+  "stats": {
+    "suites": 6,
+    "tests": 10,
+    "passes": 9,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-04-04T02:15:13.738Z",
+    "end": "2025-04-04T02:16:23.530Z",
+    "duration": 69792,
+    "testsRegistered": 12,
+    "passPercent": 75,
+    "pendingPercent": 0,
+    "other": 1,
+    "hasOther": true,
+    "skipped": 2,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "1b2c63d8-e1ce-4bd6-abfa-d2a33e7923f1",
+      "title": "",
+      "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+      "file": "\\test.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "153b0b45-32c9-471c-baa2-3d06e028ea0b",
+          "title": "Pruebas Automatizadas - Sistema de Registro Vehicular",
+          "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+          "file": "\\test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Pruebas Automatizadas - Sistema de Registro Vehicular\"",
+              "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular \"before each\" hook in \"Pruebas Automatizadas - Sistema de Registro Vehicular\"",
+              "timedOut": false,
+              "duration": 1362,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder()\n  .forBrowser('MicrosoftEdge')\n  .setEdgeService(service)\n  .setEdgeOptions(options)\n  .build();\nawait driver.get(baseUrl);",
+              "err": {},
+              "uuid": "16287d77-f313-4160-a329-f50f1f71e37e",
+              "parentUUID": "153b0b45-32c9-471c-baa2-3d06e028ea0b",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Pruebas Automatizadas - Sistema de Registro Vehicular\"",
+              "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular \"after each\" hook in \"Pruebas Automatizadas - Sistema de Registro Vehicular\"",
+              "timedOut": false,
+              "duration": 53,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.quit();",
+              "err": {},
+              "uuid": "d75d53af-513c-4628-b25b-c79342b981f3",
+              "parentUUID": "153b0b45-32c9-471c-baa2-3d06e028ea0b",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [],
+          "suites": [
+            {
+              "uuid": "dd04c86b-5773-4e5c-aede-260678c53b5f",
+              "title": "Registro de Usuario",
+              "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+              "file": "\\test.js",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Prueba positiva: Registro correcto",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Registro de Usuario Prueba positiva: Registro correcto",
+                  "timedOut": false,
+                  "duration": 1752,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const testUser = `test_${Date.now()}`;\nawait registrarUsuario(driver, testUser, PASS);\nawait driver.wait(until.elementLocated(By.css('#toast-container > div.toast-success')), 20000);\nawait takeScreenshot(driver, 'registro_usuario');",
+                  "err": {},
+                  "uuid": "5ba68c73-f621-4b98-afc6-cee6a541d2a8",
+                  "parentUUID": "dd04c86b-5773-4e5c-aede-260678c53b5f",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Prueba negativa: Usuario ya existe",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Registro de Usuario Prueba negativa: Usuario ya existe",
+                  "timedOut": false,
+                  "duration": 5400,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const testUser = \"user_existente\";\nawait registrarUsuario(driver, testUser, PASS);\nawait driver.wait(until.elementLocated(By.css('#toast-container > div.toast-success')), 20000);\nawait driver.sleep(2000);\nawait registrarUsuario(driver, testUser, PASS);\nawait driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 20000);\nconst errorElem = await driver.findElement(By.css('#toast-container > div.toast-error'));\nlet errorMessage = await errorElem.getText();\nerrorMessage = errorMessage.replace('×', '').trim();\nassert.strictEqual(errorMessage, 'El usuario ya existe');\nawait takeScreenshot(driver, 'registro_usuario_error');",
+                  "err": {},
+                  "uuid": "c6b96866-c50c-43b6-89f8-36e03c9d5b53",
+                  "parentUUID": "dd04c86b-5773-4e5c-aede-260678c53b5f",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "5ba68c73-f621-4b98-afc6-cee6a541d2a8",
+                "c6b96866-c50c-43b6-89f8-36e03c9d5b53"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 7152,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "940936f0-752f-4b97-8bd6-a3c00981c85b",
+              "title": "Inicio de Sesión",
+              "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+              "file": "\\test.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"Inicio de Sesión\"",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Inicio de Sesión \"before each\" hook in \"Inicio de Sesión\"",
+                  "timedOut": false,
+                  "duration": 1697,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await registrarUsuario(driver, USER, PASS);\nawait driver.get(baseUrl);",
+                  "err": {},
+                  "uuid": "42b77290-377d-41c6-9681-76b5f0a41e96",
+                  "parentUUID": "940936f0-752f-4b97-8bd6-a3c00981c85b",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Prueba positiva: Inicio de sesión correcto",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Inicio de Sesión Prueba positiva: Inicio de sesión correcto",
+                  "timedOut": false,
+                  "duration": 276,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await iniciarSesion(driver, USER, PASS);\nconst form = await driver.findElement(By.id('vehicleForm'));\nassert.ok(form);\nawait takeScreenshot(driver, 'inicio_sesion');",
+                  "err": {},
+                  "uuid": "e3874fd1-6377-4d1f-a614-e29d783a2fb0",
+                  "parentUUID": "940936f0-752f-4b97-8bd6-a3c00981c85b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Prueba negativa: Credenciales incorrectas",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Inicio de Sesión Prueba negativa: Credenciales incorrectas",
+                  "timedOut": false,
+                  "duration": 587,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await iniciarSesion(driver, 'wronguser', 'wrongpass');\nawait driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 20000);\nconst errorElem = await driver.findElement(By.css('#toast-container > div.toast-error'));\nlet errorMessage = await errorElem.getText();\nerrorMessage = errorMessage.replace('×', '').trim();\nassert.strictEqual(errorMessage, 'Credenciales incorrectas');\nawait takeScreenshot(driver, 'inicio_sesion_error');",
+                  "err": {},
+                  "uuid": "d68b7954-9b70-44c5-8bf0-3aa6bee40036",
+                  "parentUUID": "940936f0-752f-4b97-8bd6-a3c00981c85b",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Prueba negativa extra: Campos vacíos en login",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Inicio de Sesión Prueba negativa extra: Campos vacíos en login",
+                  "timedOut": false,
+                  "duration": 1676,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await waitForClickable(driver, By.id('btnLogin'));\nawait driver.findElement(By.id('btnLogin')).click();\nawait driver.sleep(1500);\nawait driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 20000);\nconst errorElem = await driver.findElement(By.css('#toast-container > div.toast-error'));\nlet errorMessage = await errorElem.getText();\nerrorMessage = errorMessage.replace('×', '').trim();\nassert.strictEqual(errorMessage, 'Credenciales incorrectas');\nawait takeScreenshot(driver, 'login_campos_vacios');",
+                  "err": {},
+                  "uuid": "3ae0c3c2-0395-4688-bc15-e96cf984a29e",
+                  "parentUUID": "940936f0-752f-4b97-8bd6-a3c00981c85b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "e3874fd1-6377-4d1f-a614-e29d783a2fb0",
+                "d68b7954-9b70-44c5-8bf0-3aa6bee40036",
+                "3ae0c3c2-0395-4688-bc15-e96cf984a29e"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2539,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "1996ce27-64c8-4b45-a3a7-146990234867",
+              "title": "Registro de Datos del Vehículo",
+              "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+              "file": "\\test.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"Registro de Datos del Vehículo\"",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Registro de Datos del Vehículo \"before each\" hook in \"Registro de Datos del Vehículo\"",
+                  "timedOut": false,
+                  "duration": 1865,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await registrarUsuario(driver, USER, PASS);\nawait iniciarSesion(driver, USER, PASS);\nawait driver.wait(until.elementLocated(By.id('marca')), 10000);",
+                  "err": {},
+                  "uuid": "030b7a2a-3d20-4091-84ba-9219a3661eda",
+                  "parentUUID": "1996ce27-64c8-4b45-a3a7-146990234867",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Prueba positiva: Datos del vehículo ingresados correctamente",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Registro de Datos del Vehículo Prueba positiva: Datos del vehículo ingresados correctamente",
+                  "timedOut": false,
+                  "duration": 1824,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const datosVehiculo = {\n  marca: 'Toyota',\n  modelo: 'Corolla',\n  anio: '2020',\n  color: 'Rojo',\n  placa: 'ABC123',\n  tipo: 'sedan'\n};\nawait completarFormularioVehiculo(driver, datosVehiculo);\nconst featuresForm = await driver.wait(until.elementLocated(By.id('featuresForm')), 5000);\nassert.ok(await featuresForm.isDisplayed());\nawait takeScreenshot(driver, 'registro_vehiculo');",
+                  "err": {},
+                  "uuid": "127ed44e-7efb-4b7a-8d06-fe1e4e4c7015",
+                  "parentUUID": "1996ce27-64c8-4b45-a3a7-146990234867",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Prueba negativa: Falta completar campos obligatorios",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Registro de Datos del Vehículo Prueba negativa: Falta completar campos obligatorios",
+                  "timedOut": false,
+                  "duration": 156,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await driver.findElement(By.id('btnSiguiente')).click();\nconst errorElem = await driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 5000);\nlet errorMessage = await errorElem.getText();\nerrorMessage = errorMessage.replace(/×/g, '').trim();\nassert.strictEqual(errorMessage, 'Complete todos los campos requeridos');\nawait takeScreenshot(driver, 'registro_vehiculo_error');",
+                  "err": {},
+                  "uuid": "1eeeed90-0938-495c-823b-d34b4ed73532",
+                  "parentUUID": "1996ce27-64c8-4b45-a3a7-146990234867",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Prueba negativa extra: Año inválido (no numérico)",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Registro de Datos del Vehículo Prueba negativa extra: Año inválido (no numérico)",
+                  "timedOut": false,
+                  "duration": 171,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const anioField = await waitForClickable(driver, By.id('anio'));\nawait setCampo(driver, anioField, 'dos mil veinte');\nawait driver.findElement(By.id('btnSiguiente')).click();\nconst errorElem = await driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 5000);\nlet errorMessage = await errorElem.getText();\nerrorMessage = errorMessage.replace(/×/g, '').trim();\nassert.strictEqual(errorMessage, 'Complete todos los campos requeridos');\nawait takeScreenshot(driver, 'registro_vehiculo_anio_invalido');",
+                  "err": {},
+                  "uuid": "e1876892-8d97-4bbf-a43e-c223eab71348",
+                  "parentUUID": "1996ce27-64c8-4b45-a3a7-146990234867",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "127ed44e-7efb-4b7a-8d06-fe1e4e4c7015",
+                "1eeeed90-0938-495c-823b-d34b4ed73532",
+                "e1876892-8d97-4bbf-a43e-c223eab71348"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 2151,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "5cc46bc5-bca4-4344-994a-264586ba33e8",
+              "title": "Selección de Características del Vehículo",
+              "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+              "file": "\\test.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before each\" hook in \"Selección de Características del Vehículo\"",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Selección de Características del Vehículo \"before each\" hook in \"Selección de Características del Vehículo\"",
+                  "timedOut": false,
+                  "duration": 6703,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await registrarUsuario(driver, USER, PASS);\nawait iniciarSesion(driver, USER, PASS);\nconst datosVehiculo = {\n  marca: 'Toyota',\n  modelo: 'Corolla',\n  anio: '2020',\n  color: 'Rojo',\n  placa: 'ABC123',\n  tipo: 'sedan'\n};\nawait completarFormularioVehiculo(driver, datosVehiculo);\nawait driver.wait(until.elementLocated(By.id('featuresForm')), 10000);\nawait driver.sleep(3000);\nawait driver.wait(until.elementIsVisible(await driver.findElement(By.id('btnRegistrar'))), 5000);",
+                  "err": {},
+                  "uuid": "1a5c4641-2593-4450-adde-cc40ac9a6fa4",
+                  "parentUUID": "5cc46bc5-bca4-4344-994a-264586ba33e8",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Prueba positiva: Selección correcta de características",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Selección de Características del Vehículo Prueba positiva: Selección correcta de características",
+                  "timedOut": false,
+                  "duration": 10020,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "await driver.wait(until.elementsLocated(By.css('#featuresForm input[type=\"checkbox\"].caracteristica-checkbox')), 10000);\nconst checkboxes = await driver.findElements(By.css('#featuresForm input[type=\"checkbox\"].caracteristica-checkbox'));\nif (checkboxes.length === 0) {\n  throw new Error('No se encontraron checkboxes de características');\n}\nawait checkboxes[0].click();\nawait driver.findElement(By.id('btnRegistrar')).click();\nawait driver.wait(until.elementLocated(By.id('resumenForm')), 5000);\nawait takeScreenshot(driver, 'caracteristicas');",
+                  "err": {
+                    "message": "TimeoutError: Waiting for at least one element to be located By(css selector, #featuresForm input[type=\"checkbox\"].caracteristica-checkbox)\nWait timed out after 10020ms",
+                    "estack": "TimeoutError: Waiting for at least one element to be located By(css selector, #featuresForm input[type=\"checkbox\"].caracteristica-checkbox)\nWait timed out after 10020ms\n    at C:\\Users\\smith\\Desktop\\seleccion\\node_modules\\selenium-webdriver\\lib\\webdriver.js:929:22\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)",
+                    "diff": null
+                  },
+                  "uuid": "fed653f5-6e07-423e-8586-8a2e822f2bf6",
+                  "parentUUID": "5cc46bc5-bca4-4344-994a-264586ba33e8",
+                  "isHook": false,
+                  "skipped": false
+                },
+                {
+                  "title": "Prueba negativa: No se selecciona ninguna característica",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Selección de Características del Vehículo Prueba negativa: No se selecciona ninguna característica",
+                  "timedOut": false,
+                  "duration": 125,
+                  "state": "passed",
+                  "speed": "slow",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await driver.findElement(By.id('btnRegistrar')).click();\nconst errorElem = await driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 5000);\nlet errorMessage = await errorElem.getText();\nerrorMessage = errorMessage.replace(/×/g, '').trim();\nassert.strictEqual(errorMessage, 'Seleccione al menos una característica');\nawait takeScreenshot(driver, 'caracteristicas_error');",
+                  "err": {},
+                  "uuid": "277959d4-28d6-45e4-85eb-847c51e80458",
+                  "parentUUID": "5cc46bc5-bca4-4344-994a-264586ba33e8",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "277959d4-28d6-45e4-85eb-847c51e80458"
+              ],
+              "failures": [
+                "fed653f5-6e07-423e-8586-8a2e822f2bf6"
+              ],
+              "pending": [],
+              "skipped": [],
+              "duration": 10145,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            },
+            {
+              "uuid": "5230108b-0f27-4027-9c79-f70c12e07c95",
+              "title": "Resumen y Descarga de PDF",
+              "fullFile": "C:\\Users\\smith\\Desktop\\seleccion\\pruebasA\\test.js",
+              "file": "\\test.js",
+              "beforeHooks": [
+                {
+                  "title": "\"before all\" hook for \"Prueba positiva: Visualización y descarga de PDF\"",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Resumen y Descarga de PDF \"before all\" hook for \"Prueba positiva: Visualización y descarga de PDF\"",
+                  "timedOut": false,
+                  "duration": 7857,
+                  "state": "failed",
+                  "speed": null,
+                  "pass": false,
+                  "fail": true,
+                  "pending": false,
+                  "context": null,
+                  "code": "mainDriver = await new Builder()\n  .forBrowser('MicrosoftEdge')\n  .setEdgeService(service)\n  .setEdgeOptions(options)\n  .build();\n\nawait mainDriver.get(baseUrl);\nawait registrarUsuario(mainDriver, USER, PASS);\nawait iniciarSesion(mainDriver, USER, PASS);\nawait completarFormularioVehiculo(mainDriver, {\n  marca: 'Toyota',\n  modelo: 'Corolla',\n  anio: '2020',\n  color: 'Rojo',\n  placa: 'ABC123',\n  tipo: 'sedan'\n});\nawait seleccionarCaracteristicas(mainDriver);",
+                  "err": {
+                    "message": "Error: No se encontraron checkboxes de características",
+                    "estack": "Error: No se encontraron checkboxes de características\n    at seleccionarCaracteristicas (test.js:108:13)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async Context.<anonymous> (test.js:301:7)",
+                    "diff": null
+                  },
+                  "uuid": "be938072-fd74-414e-b555-e2b20bcea3a0",
+                  "parentUUID": "5230108b-0f27-4027-9c79-f70c12e07c95",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "afterHooks": [
+                {
+                  "title": "\"after all\" hook in \"Resumen y Descarga de PDF\"",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Resumen y Descarga de PDF \"after all\" hook in \"Resumen y Descarga de PDF\"",
+                  "timedOut": false,
+                  "duration": 66,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "await mainDriver.quit();",
+                  "err": {},
+                  "uuid": "a535b7e4-3ebc-4043-a264-7af810f9d98b",
+                  "parentUUID": "5230108b-0f27-4027-9c79-f70c12e07c95",
+                  "isHook": true,
+                  "skipped": false
+                }
+              ],
+              "tests": [
+                {
+                  "title": "Prueba positiva: Visualización y descarga de PDF",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Resumen y Descarga de PDF Prueba positiva: Visualización y descarga de PDF",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const btnDescargar = await mainDriver.wait(until.elementLocated(By.id('btnDescargarPDF')), 10000);\nawait mainDriver.executeScript(\"arguments[0].click();\", btnDescargar);\nawait mainDriver.sleep(5000);\nconst toast = await mainDriver.wait(until.elementLocated(By.css('#toast-container > div.toast-success')), 10000);\nconst texto = (await toast.getText()).replace(/×/g, '').trim();\nassert.match(texto, /PDF generado/i);\nawait takeScreenshot(mainDriver, 'resumen_pdf');",
+                  "err": {},
+                  "uuid": "577d4e67-fa59-4f1e-b423-b57566bc28a1",
+                  "parentUUID": "5230108b-0f27-4027-9c79-f70c12e07c95",
+                  "isHook": false,
+                  "skipped": true
+                },
+                {
+                  "title": "Prueba negativa: Descargar PDF sin completar el registro",
+                  "fullTitle": "Pruebas Automatizadas - Sistema de Registro Vehicular Resumen y Descarga de PDF Prueba negativa: Descargar PDF sin completar el registro",
+                  "timedOut": false,
+                  "duration": 0,
+                  "state": null,
+                  "speed": null,
+                  "pass": false,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "const tempDriver = await new Builder()\n  .forBrowser('MicrosoftEdge')\n  .setEdgeService(service)\n  .setEdgeOptions(options)\n  .build();\ntry {\n  await tempDriver.get(baseUrl);\n  await registrarUsuario(tempDriver, 'tempUser', PASS);\n  await iniciarSesion(tempDriver, 'tempUser', PASS);\n  const btnDescargar = await tempDriver.wait(until.elementLocated(By.id('btnDescargarPDF')), 10000);\n  await tempDriver.executeScript(\"arguments[0].click();\", btnDescargar);\n  const errorElem = await tempDriver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 10000);\n  const errorMessage = (await errorElem.getText()).replace(/×/g, '').trim();\n  assert.strictEqual(errorMessage, 'Debe completar el registro del vehículo antes de descargar el PDF.');\n  await takeScreenshot(tempDriver, 'resumen_pdf_error');\n} finally {\n  await tempDriver.quit();\n}",
+                  "err": {},
+                  "uuid": "8e327830-4f36-4b71-9415-7ab3a52b7b73",
+                  "parentUUID": "5230108b-0f27-4027-9c79-f70c12e07c95",
+                  "isHook": false,
+                  "skipped": true
+                }
+              ],
+              "suites": [],
+              "passes": [],
+              "failures": [],
+              "pending": [],
+              "skipped": [
+                "577d4e67-fa59-4f1e-b423-b57566bc28a1",
+                "8e327830-4f36-4b71-9415-7ab3a52b7b73"
+              ],
+              "duration": 0,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 60000
+            }
+          ],
+          "passes": [],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 0,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 12000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.1.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
