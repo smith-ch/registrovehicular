@@ -155,7 +155,7 @@ Este proyecto está licenciado bajo la Licencia Apache 2.0. Consulta el archivo 
 ## Contacto
 Si tienes dudas o sugerencias, puedes comunicarte a través de:
 - GitHub: [smith-ch](https://github.com/smith-ch)
-- Correo Electrónico: [tuemail@example.com]
+- Correo Electrónico: [smithrodriguez345@gmail.com]
 
 ---
 ¡Gracias por revisar este proyecto! 🚀
