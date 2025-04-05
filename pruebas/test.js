@@ -87,9 +87,12 @@ async function completarFormularioVehiculo(driver, datos) {
   const placaField = await waitForClickable(driver, By.id('placa'));
   await setCampo(driver, placaField, placa);
   
+  // Actualizamos el campo 'tipo' y disparar el evento change para cargar características
   const tipoField = await waitForClickable(driver, By.id('tipo'));
   await setCampo(driver, tipoField, tipo);
-  
+  // Ejecutar jQuery change para cargar las opciones en #caracteristicas
+  await driver.executeScript("$('#tipo').change();");
+
   await waitForClickable(driver, By.id('btnSiguiente'));
   await driver.findElement(By.id('btnSiguiente')).click();
   await driver.sleep(1500);
@@ -99,11 +102,12 @@ async function completarFormularioVehiculo(driver, datos) {
 async function seleccionarCaracteristicas(driver, seleccionar = true) {
   await waitForClickable(driver, By.id('btnRegistrar'));
   if (seleccionar) {
-    await driver.wait(until.elementLocated(By.id('featuresForm')), 10000);
-    // Se espera un tiempo adicional para que los checkboxes se carguen
+    // Esperar que se cargue el contenedor de características
+    await driver.wait(until.elementLocated(By.css('#caracteristicas input[type="checkbox"]')), 10000);
+    // Se espera un tiempo adicional para que se rendericen todos los checkboxes
     await driver.sleep(3000);
-    // Usar selector actualizado: se busca input[type="checkbox"] con la clase 'caracteristica-checkbox' dentro de #featuresForm
-    const checkboxes = await driver.findElements(By.css('#featuresForm input[type="checkbox"].caracteristica-checkbox'));
+    // Actualizamos el selector para buscar en el contenedor '#caracteristicas'
+    const checkboxes = await driver.findElements(By.css('#caracteristicas input[type="checkbox"]'));
     if (checkboxes.length === 0) {
       throw new Error('No se encontraron checkboxes de características');
     }
@@ -255,8 +259,9 @@ describe('Pruebas Automatizadas - Sistema de Registro Vehicular', function () {
     });
 
     it('Prueba positiva: Selección correcta de características', async () => {
-      await driver.wait(until.elementsLocated(By.css('#featuresForm input[type="checkbox"].caracteristica-checkbox')), 10000);
-      const checkboxes = await driver.findElements(By.css('#featuresForm input[type="checkbox"].caracteristica-checkbox'));
+      // Esperar que se cargue al menos un checkbox dentro de '#caracteristicas'
+      await driver.wait(until.elementsLocated(By.css('#caracteristicas input[type="checkbox"]')), 10000);
+      const checkboxes = await driver.findElements(By.css('#caracteristicas input[type="checkbox"]'));
       if (checkboxes.length === 0) {
         throw new Error('No se encontraron checkboxes de características');
       }
@@ -265,7 +270,7 @@ describe('Pruebas Automatizadas - Sistema de Registro Vehicular', function () {
       await driver.wait(until.elementLocated(By.id('resumenForm')), 5000);
       await takeScreenshot(driver, 'caracteristicas');
     });
-
+    
     it('Prueba negativa: No se selecciona ninguna característica', async () => {
       await driver.findElement(By.id('btnRegistrar')).click();
       const errorElem = await driver.wait(until.elementLocated(By.css('#toast-container > div.toast-error')), 5000);

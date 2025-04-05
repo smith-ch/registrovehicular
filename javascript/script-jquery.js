@@ -192,17 +192,26 @@ $('#btnLimpiar').click(() => {
 });
 
 $('#btnDescargarPDF').click(() => {
-    const element = document.getElementById('resumenForm');
-    html2canvas(element).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-        const imgWidth = 190;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        
-        pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-        pdf.save(`registro_${vehiculoActual.placa}.pdf`);
-    });
+    // Verificar si se completó el registro (se muestra el resumen)
+    if ($('#resumenForm').is(':visible')) {
+        const element = document.getElementById('resumenForm');
+        html2canvas(element).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
+            const imgWidth = 190;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            
+            pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+            pdf.save(`registro_${vehiculoActual.placa}.pdf`);
+            // Mostrar mensaje de éxito tras generar el PDF
+            toastr.success('PDF generado correctamente');
+        });
+    } else {
+        // Si no se completó el registro, mostrar error
+        toastr.error('Debe completar el registro del vehículo antes de descargar el PDF.');
+    }
 });
+
 
 // Manejo de Edición
 $(document).on('click', '.btn-editar', function() {
