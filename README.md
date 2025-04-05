@@ -1,165 +1,162 @@
-# selenium-webdriver
+# Registro Vehicular - Pruebas Automatizadas con Selenium
 
-Selenium es una biblioteca de automatización de navegadores. Usada con mayor frecuencia para probar aplicaciones web, Selenium puede ser utilizada para cualquier tarea que requiera automatizar la interacción con el navegador.
+## Descripción del Proyecto
+Este proyecto implementa pruebas automatizadas para una aplicación de registro vehicular utilizando **Selenium WebDriver** en **JavaScript**. La automatización permite verificar el correcto funcionamiento del sistema, asegurando que los usuarios puedan registrar sus cuentas, iniciar sesión y gestionar información de vehículos de manera eficiente.
 
-## Instalación
+El objetivo principal es garantizar que todas las funcionalidades clave de la aplicación respondan correctamente bajo distintos escenarios, incluyendo datos válidos, errores comunes y validaciones.
 
-Selenium puede instalarse a través de npm con:
+## Características Principales
+- Automatización de pruebas funcionales en navegador con Selenium.
+- Generación de reportes en HTML con Mochawesome.
+- Captura de pantalla automática ante fallas o verificaciones importantes.
+- Validaciones de formularios y flujos críticos del sistema.
 
-  npm install selenium-webdriver
+## Tecnologías Utilizadas
+- **Node.js**
+- **Selenium WebDriver**
+- **Mocha** (framework de pruebas)
+- **Chai** (aserciones)
+- **Mochawesome** (reportes de prueba en HTML)
+- **Chromedriver**
+- **HTML/CSS** (para el frontend de la aplicación)
 
-Necesitarás descargar componentes adicionales para trabajar con cada uno de los principales navegadores. Los controladores para Chrome, Firefox y los navegadores IE y Edge de Microsoft son ejecutables independientes que deben colocarse en el [PATH] de tu sistema. El `safaridriver` de Apple (v10 y superior) se encuentra en la siguiente ruta: `/usr/bin/safaridriver`. Para habilitar la automatización en Safari, necesitas ejecutar el comando `safaridriver --enable`.
+## Requisitos del Sistema
+Antes de ejecutar el proyecto, asegúrate de contar con los siguientes requisitos:
 
-| Navegador         | Componente                        |
-| :---------------- | :-------------------------------- |
-| Chrome            | [chromedriver(.exe)][chrome]     |
-| Internet Explorer | [IEDriverServer.exe][release]    |
-| Edge              | [MicrosoftWebDriver.msi][edge]   |
-| Firefox           | [geckodriver(.exe)][geckodriver] |
-| Opera             | [operadriver(.exe)][operadriver] |
-| Safari            | [safaridriver]                   |
+- **Node.js** (versión 14 o superior)
+- **npm** (gestor de paquetes de Node.js)
+- **Google Chrome** (o cualquier otro navegador compatible con Selenium)
+- **Chromedriver** (u otro WebDriver según el navegador que uses)
+- **Sistema operativo compatible:** Windows, macOS o Linux
 
-## Uso
+## Instalación y Configuración
+Para instalar y configurar el proyecto, sigue estos pasos:
 
-El siguiente ejemplo y otros están incluidos en el directorio `example`. También puedes encontrar útiles las pruebas de selenium-webdriver.
+1. **Clona este repositorio:**
+   ```sh
+   git clone https://github.com/smith-ch/registrovehicular.git
+   cd registrovehicular
+   ```
 
-```javascript
-const { Builder, Browser, By, Key, until } = require('selenium-webdriver')
+2. **Instala las dependencias necesarias:**
+   ```sh
+   npm install
+   ```
 
-;(async function example() {
-  let driver = await new Builder().forBrowser(Browser.FIREFOX).build()
-  try {
-  await driver.get('https://www.google.com/ncr')
-  await driver.findElement(By.name('q')).sendKeys('webdriver', Key.RETURN)
-  await driver.wait(until.titleIs('webdriver - Google Search'), 1000)
-  } finally {
-  await driver.quit()
-  }
-})()
+3. **Configura el WebDriver:**
+   Asegúrate de tener `chromedriver` o el driver correspondiente instalado y disponible en el PATH del sistema.
+
+## Estructura del Proyecto
+```
+registrovehicular/
+├── pruebas/
+│   ├── test.js                # Pruebas automatizadas principales
+│   ├── screenshots/           # Capturas de pantalla generadas
+│   └── mochawesome-report/   # Reporte HTML generado por mochawesome
+├── src/                      # Código fuente de la aplicación web
+├── README.md                 # Documentación del proyecto
+├── package.json              # Configuración de npm
+└── ...
 ```
 
-### Usando la API de Builder
+## Ejecución de las Pruebas
+Para ejecutar las pruebas automatizadas, usa el siguiente comando:
 
-La clase `Builder` es tu herramienta principal para configurar nuevas instancias de WebDriver. En lugar de llenar tu código con ramas para los diferentes navegadores, el constructor te permite configurar todas las opciones en un solo flujo. Cuando llamas a `Builder#build()`, todas las opciones irrelevantes para el navegador seleccionado se descartan:
-
-```javascript
-const webdriver = require('selenium-webdriver')
-const chrome = require('selenium-webdriver/chrome')
-const firefox = require('selenium-webdriver/firefox')
-
-let driver = new webdriver.Builder()
-  .forBrowser(webdriver.Browser.FIREFOX)
-  .setChromeOptions(/* ... */)
-  .setFirefoxOptions(/* ... */)
-  .build()
+```sh
+npm test
 ```
 
-¿Por qué querrías configurar opciones irrelevantes para el navegador objetivo? La API de `Builder` define tu configuración _predeterminada_. Puedes cambiar el navegador objetivo en tiempo de ejecución a través de la variable de entorno `SELENIUM_BROWSER`. Por ejemplo, el script `example/google_search.js` está configurado para ejecutarse en Firefox. Puedes ejecutar el ejemplo en otros navegadores simplemente cambiando el entorno en tiempo de ejecución:
+Esto ejecutará las pruebas definidas en `pruebas/test.js` y generará un reporte HTML en `pruebas/mochawesome-report/`.
 
-  # cd node_modules/selenium-webdriver
-  node example/google_search
-  SELENIUM_BROWSER=chrome node example/google_search
-  SELENIUM_BROWSER=safari node example/google_search
+### Ver Reportes de Pruebas
+Después de ejecutar las pruebas:
+1. Abre el archivo `pruebas/mochawesome-report/mochawesome.html` en tu navegador para visualizar el informe interactivo.
+2. Se mostrará el resultado de cada caso de prueba con detalles y capturas si están habilitadas.
 
-### El Servidor Independiente de Selenium
+## Historias de Usuario
+A continuación, se detallan las historias de usuario implementadas en el proyecto:
 
-El Servidor Independiente de Selenium actúa como un proxy entre tu script y los controladores específicos del navegador. El servidor puede usarse al ejecutar localmente, pero no se recomienda ya que introduce un salto adicional para cada solicitud y ralentizará las cosas. Sin embargo, el servidor es necesario para usar un navegador en un host remoto (la mayoría de los controladores de navegador, como el IEDriverServer, no aceptan conexiones remotas).
+### ✅ Historia de Usuario 1: Registro de Usuario
+**Como nuevo usuario, quiero crear una cuenta en el sistema, para poder iniciar sesión y usar la aplicación.**
 
-Para usar el Servidor de Selenium, necesitarás instalar el [JDK](http://www.oracle.com/technetwork/java/javase/downloads/index.html) y descargar el servidor más reciente desde [Selenium][release]. Una vez descargado, ejecuta el servidor con:
+- **Criterios de aceptación:**
+  ✔ Debe permitir ingresar nombre de usuario y contraseña.
+  ✔ Al hacer clic en “Registrar”, debe crearse la cuenta correctamente.
+  ✔ Debe mostrarse un mensaje de confirmación.
 
-  java -jar selenium-server-4.4.0.jar standalone
+- **Criterios de rechazo:**
+  ❌ Campos vacíos deben impedir el registro.
+  ❌ Si el nombre de usuario ya existe, debe mostrar un mensaje de error.
 
-Puedes configurar tus pruebas para ejecutarse contra un servidor remoto a través de la API de Builder:
+### ✅ Historia de Usuario 2: Inicio de Sesión
+**Como usuario registrado, quiero poder iniciar sesión con mi cuenta, para acceder al sistema y registrar vehículos.**
 
-```javascript
-let driver = new webdriver.Builder()
-  .forBrowser(webdriver.Browser.FIREFOX)
-  .usingServer('http://localhost:4444/wd/hub')
-  .build()
-```
+- **Criterios de aceptación:**
+  ✔ Debe validar las credenciales ingresadas.
+  ✔ Si son correctas, debe redirigir al formulario de vehículos.
 
-O cambiar la configuración de Builder en tiempo de ejecución con la variable de entorno `SELENIUM_REMOTE_URL`:
+- **Criterios de rechazo:**
+  ❌ Si las credenciales son inválidas, debe mostrar un error.
+  ❌ Campos vacíos deben impedir el inicio de sesión.
 
-  SELENIUM_REMOTE_URL="http://localhost:4444/wd/hub" node script.js
+### ✅ Historia de Usuario 3: Registro de Datos del Vehículo
+**Como usuario autenticado, quiero ingresar los datos de mi vehículo, para tener un registro de sus especificaciones básicas.**
 
-Puedes experimentar con estas opciones usando el script `example/google_search.js` proporcionado con `selenium-webdriver`.
+- **Criterios de aceptación:**
+  ✔ Debe permitir ingresar marca, modelo, año, color, placa y tipo.
+  ✔ Al hacer clic en “Siguiente”, debe guardar los datos y avanzar al siguiente paso.
 
-## Documentación
+- **Criterios de rechazo:**
+  ❌ Si algún campo obligatorio está vacío, no debe avanzar.
+  ❌ Si el año es inválido, debe mostrar un mensaje de error.
 
-La documentación de la API está disponible en línea desde el [proyecto Selenium][api]. Recursos adicionales incluyen:
+### ✅ Historia de Usuario 4: Selección de Características del Vehículo
+**Como usuario, quiero seleccionar características adicionales de mi vehículo, para detallar aún más su información.**
 
-- el canal #selenium en IRC freenode
-- la lista [selenium-users@googlegroups.com][users]
-- la documentación de [SeleniumHQ](https://selenium.dev/documentation/)
+- **Criterios de aceptación:**
+  ✔ Debe mostrar una lista de características para elegir.
+  ✔ Al hacer clic en “Registrar”, debe guardar la selección.
 
-## Contribuir
+- **Criterios de rechazo:**
+  ❌ No se debe permitir avanzar si no se selecciona al menos una característica (si aplica).
 
-Se aceptan contribuciones a través de solicitudes de extracción en [GitHub][gh] o parches mediante el [rastreador de problemas de Selenium][issues].
+### ✅ Historia de Usuario 5: Visualización del Resumen y Descarga de PDF
+**Como usuario, quiero ver un resumen de toda la información ingresada y poder descargarla en PDF, para tener un respaldo de los datos del vehículo.**
 
-## Política de Soporte para Node
+- **Criterios de aceptación:**
+  ✔ Debe mostrar los datos del vehículo y sus características en una tabla.
+  ✔ Al hacer clic en “Descargar PDF”, debe generarse el archivo correctamente.
 
-Cada versión de selenium-webdriver soportará la última versión _semver-minor_ de las versiones LTS y estables de Node. Todas las versiones _semver-major_ y _semver-minor_ entre la versión LTS y la estable tendrán soporte de "mejor esfuerzo". Después de un lanzamiento de Selenium, cualquier versión _semver-minor_ de Node también tendrá soporte de "mejor esfuerzo". Las versiones anteriores a la última LTS, las versiones _semver-major_ y todas las ramas de lanzamiento inestables (por ejemplo, "v.Next") se consideran estrictamente no soportadas.
+- **Criterios de rechazo:**
+  ❌ Si no hay datos cargados, no se debe permitir la descarga.
+  ❌ Si el archivo no se genera correctamente, debe mostrar un mensaje de error.
 
-Por ejemplo, supongamos que las versiones actuales LTS y estables son v14.20.0 y v18.8.0, respectivamente. Entonces, un lanzamiento de Selenium tendría los siguientes niveles de soporte:
+## Capturas de Pantalla
+Las capturas de pantalla de cada prueba automatizada se generan automáticamente y se almacenan en la carpeta `pruebas/screenshots`. Esto permite auditar visualmente el comportamiento de la aplicación durante las pruebas.
 
-|  Versión  |     Soporte     |
-| :-------: | :-------------: |
-| <= 14.19  | _no soportado_  |
-|  14.20.0  |    soportado    |
-|  18.0-7   | mejor esfuerzo  |
-|  18.8.0   |    soportado    |
-| >= 18.8.0 | mejor esfuerzo  |
-|  v.Next   | _no soportado_  |
+## Buenas Prácticas Aplicadas
+- Separación clara entre lógica de pruebas y código fuente.
+- Uso de `assert` para comprobaciones lógicas y validaciones.
+- Generación de reportes HTML para facilitar la revisión.
+- Documentación de todas las historias de usuario con criterios bien definidos.
+- Capturas de pantalla automáticas en escenarios clave.
 
-### Definiciones de Niveles de Soporte
-
-- _soportado:_ Una versión de selenium-webdriver será compatible con la API de la plataforma, sin el uso de banderas de tiempo de ejecución.
-
-- _mejor esfuerzo:_ Los errores serán investigados según el tiempo lo permita. La compatibilidad con la API solo está garantizada donde se requiera por una versión _soportada_. Esto significa que la adopción de nuevas características de JS, como los módulos ES2015, dependerá de lo que sea compatible en el LTS de Node.
-
-- _no soportado:_ Los informes de errores serán cerrados como no solucionables y la compatibilidad con la API no está garantizada.
-
-### Calendario de Soporte Proyectado
-
-Si Node lanza un nuevo [LTS] cada octubre y una nueva versión principal cada 6 meses, la ventana de soporte para selenium-webdriver será aproximadamente:
-
-| Lanzamiento |      Estado      | FIN DE VIDA |
-| :---------: | :--------------: | :---------: |
-|   v14.x     | LTS de Mantenimiento | 2023-04-30  |
-|   v16.x     |    LTS Activo    | 2023-09-11  |
-|   v18.x     |     Actual       | 2025-04-30  |
-|   v19.x     |     Pendiente    | 2023-06-01  |
-|    v20      |     Pendiente    | 2026-04-30  |
-
-## Problemas
-
-Por favor, informa cualquier problema utilizando el [rastreador de problemas de Selenium][issues]. Al usar el rastreador de problemas:
-
-- **Haz** incluir una descripción detallada del problema.
-- **Haz** incluir un enlace a un [gist](http://gist.github.com/) con cualquier traza de pila/registros interesantes (también puedes adjuntarlos directamente al informe de errores).
-- **Haz** incluir un [caso de prueba reducido][reduction]. Informar "no se puede encontrar el elemento en la página" _no_ es un informe válido; no hay nada que podamos investigar. Espera que tu informe de error sea cerrado si no proporcionas suficiente información para que lo investiguemos.
-- **No hagas** solicitudes de ayuda básicas en el rastreador de problemas. Todas las consultas de ayuda deben dirigirse al [foro de usuarios][users] o al canal #selenium en IRC.
-- **No hagas** comentarios vacíos como "Yo también veo esto" o "¿Alguna actualización?". Estos no proporcionan información adicional y llenan el registro.
-- **No informes** regresiones en errores cerrados, ya que no se monitorean activamente para actualizaciones (especialmente errores que tienen más de 6 meses). Por favor, abre un nuevo problema y referencia el error original en tu informe.
+## Contribuciones
+Si deseas contribuir a este proyecto:
+1. **Haz un fork del repositorio**
+2. **Crea una nueva rama (`git checkout -b feature-nueva-funcionalidad`)**
+3. **Realiza los cambios y confirma los commits (`git commit -m 'Añadida nueva funcionalidad'`)**
+4. **Sube los cambios (`git push origin feature-nueva-funcionalidad`)**
+5. **Abre un Pull Request en GitHub**
 
 ## Licencia
+Este proyecto está licenciado bajo la Licencia Apache 2.0. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-Licenciado a la Software Freedom Conservancy (SFC) bajo uno o más acuerdos de licencia de contribuyentes. Consulta el archivo NOTICE distribuido con este trabajo para obtener información adicional sobre la propiedad de los derechos de autor. La SFC licencia este archivo bajo la Licencia Apache, Versión 2.0 (la "Licencia"); no puedes usar este archivo excepto en cumplimiento con la Licencia. Puedes obtener una copia de la Licencia en:
+## Contacto
+Si tienes dudas o sugerencias, puedes comunicarte a través de:
+- GitHub: [smith-ch](https://github.com/smith-ch)
+- Correo Electrónico: [tuemail@example.com]
 
-http://www.apache.org/licenses/LICENSE-2.0
+---
+¡Gracias por revisar este proyecto! 🚀
 
-A menos que lo requiera la ley aplicable o se acuerde por escrito, el software distribuido bajo la Licencia se distribuye "TAL CUAL", SIN GARANTÍAS NI CONDICIONES DE NINGÚN TIPO, ya sean expresas o implícitas. Consulta la Licencia para obtener el lenguaje específico que rige los permisos y limitaciones bajo la Licencia.
-
-[LTS]: https://github.com/nodejs/LTS
-[PATH]: http://es.wikipedia.org/wiki/PATH_%28variable%29
-[api]: https://www.selenium.dev/selenium/docs/api/javascript/
-[chrome]: https://googlechromelabs.github.io/chrome-for-testing/#stable
-[gh]: https://github.com/SeleniumHQ/selenium/
-[issues]: https://github.com/SeleniumHQ/selenium/issues
-[edge]: http://go.microsoft.com/fwlink/?LinkId=619687
-[geckodriver]: https://github.com/mozilla/geckodriver/releases/
-[reduction]: http://www.webkit.org/quality/reduction.html
-[release]: https://www.selenium.dev/downloads/
-[users]: https://groups.google.com/forum/#!forum/selenium-users
-[safaridriver]: https://developer.apple.com/library/prerelease/content/releasenotes/General/WhatsNewInSafari/Articles/Safari_10_0.html#//apple_ref/doc/uid/TP40014305-CH11-DontLinkElementID_28
-[operadriver]: https://github.com/operasoftware/operachromiumdriver/releases
