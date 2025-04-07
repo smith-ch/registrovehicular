@@ -1,162 +1,136 @@
-# Registro Vehicular - Pruebas Automatizadas con Selenium
+Registro Vehicular - Pruebas Automatizadas con Selenium 🚗💻
+✨ Descripción del Proyecto
+Este proyecto consiste en automatizar pruebas para una aplicación web de registro vehicular. Usé Selenium WebDriver con JavaScript para asegurar que todas las funciones principales del sistema (como registrar usuarios, iniciar sesión, registrar vehículos, etc.) funcionen correctamente. La idea es validar que el sistema responda bien ante diferentes escenarios, tanto exitosos como con errores.
 
-## Descripción del Proyecto
-Este proyecto implementa pruebas automatizadas para una aplicación de registro vehicular utilizando **Selenium WebDriver** en **JavaScript**. La automatización permite verificar el correcto funcionamiento del sistema, asegurando que los usuarios puedan registrar sus cuentas, iniciar sesión y gestionar información de vehículos de manera eficiente.
+Todo esto lo realicé con el objetivo de aplicar buenas prácticas de testing y asegurar la calidad del sistema de manera automatizada.
 
-El objetivo principal es garantizar que todas las funcionalidades clave de la aplicación respondan correctamente bajo distintos escenarios, incluyendo datos válidos, errores comunes y validaciones.
+⚙️ Tecnologías Utilizadas
+Node.js
 
-## Características Principales
-- Automatización de pruebas funcionales en navegador con Selenium.
-- Generación de reportes en HTML con Mochawesome.
-- Captura de pantalla automática ante fallas o verificaciones importantes.
-- Validaciones de formularios y flujos críticos del sistema.
+Selenium WebDriver
 
-## Tecnologías Utilizadas
-- **Node.js**
-- **Selenium WebDriver**
-- **Mocha** (framework de pruebas)
-- **Chai** (aserciones)
-- **Mochawesome** (reportes de prueba en HTML)
-- **Chromedriver**
-- **HTML/CSS** (para el frontend de la aplicación)
+Mocha (para las pruebas)
 
-## Requisitos del Sistema
-Antes de ejecutar el proyecto, asegúrate de contar con los siguientes requisitos:
+Chai (para las aserciones)
 
-- **Node.js** (versión 14 o superior)
-- **npm** (gestor de paquetes de Node.js)
-- **Google Chrome** (o cualquier otro navegador compatible con Selenium)
-- **Chromedriver** (u otro WebDriver según el navegador que uses)
-- **Sistema operativo compatible:** Windows, macOS o Linux
+Mochawesome (para los reportes en HTML)
 
-## Instalación y Configuración
-Para instalar y configurar el proyecto, sigue estos pasos:
+Microsoft Edge WebDriver
 
-1. **Clona este repositorio:**
-   ```sh
-   git clone https://github.com/smith-ch/registrovehicular.git
-   cd registrovehicular
-   ```
+HTML/CSS (en el frontend de la app)
 
-2. **Instala las dependencias necesarias:**
-   ```sh
-   npm install
-   ```
+💻 Requisitos del Sistema
+Antes de ejecutar el proyecto, asegúrate de tener lo siguiente:
 
-3. **Configura el WebDriver:**
-   Asegúrate de tener `chromedriver` o el driver correspondiente instalado y disponible en el PATH del sistema.
+Node.js (versión 14 o superior)
 
-## Estructura del Proyecto
-```
+npm (gestor de paquetes)
+
+Microsoft Edge instalado
+
+Edge WebDriver configurado y disponible en el PATH
+
+Un sistema operativo compatible (Windows, macOS o Linux)
+
+📦 Instalación y Configuración
+Para poner en marcha el proyecto:
+
+Clona el repositorio:
+
+bash
+Copiar
+Editar
+git clone https://github.com/smith-ch/registrovehicular.git
+cd registrovehicular
+Instala las dependencias:
+
+bash
+Copiar
+Editar
+npm install
+Verifica que Edge WebDriver esté correctamente instalado y accesible desde el sistema.
+
+📁 Estructura del Proyecto
+bash
+Copiar
+Editar
 registrovehicular/
 ├── pruebas/
-│   ├── test.js                # Pruebas automatizadas principales
-│   ├── screenshots/           # Capturas de pantalla generadas
-│   └── mochawesome-report/   # Reporte HTML generado por mochawesome
-├── src/                      # Código fuente de la aplicación web
-├── README.md                 # Documentación del proyecto
-├── package.json              # Configuración de npm
+│   ├── test.js                # Pruebas automatizadas
+│   ├── screenshots/           # Capturas generadas
+│   └── mochawesome-report/   # Reporte HTML
+├── src/                      # Código fuente de la app
+├── README.md                 # Este archivo 🙂
+├── package.json              # Configuración npm
 └── ...
-```
+🧪 Ejecución de las Pruebas
+Para correr las pruebas:
 
-## Ejecución de las Pruebas
-Para ejecutar las pruebas automatizadas, usa el siguiente comando:
-
-```sh
+bash
+Copiar
+Editar
 npm test
-```
+Esto generará un reporte HTML dentro de pruebas/mochawesome-report/.
 
-Esto ejecutará las pruebas definidas en `pruebas/test.js` y generará un reporte HTML en `pruebas/mochawesome-report/`.
+📊 Ver Reportes
+Al terminar las pruebas:
 
-### Ver Reportes de Pruebas
-Después de ejecutar las pruebas:
-1. Abre el archivo `pruebas/mochawesome-report/mochawesome.html` en tu navegador para visualizar el informe interactivo.
-2. Se mostrará el resultado de cada caso de prueba con detalles y capturas si están habilitadas.
+Abre pruebas/mochawesome-report/mochawesome.html para ver los resultados.
 
-## Historias de Usuario
-A continuación, se detallan las historias de usuario implementadas en el proyecto:
+Ahí verás cada prueba detallada con capturas si hubo errores o validaciones importantes.
 
-### ✅ Historia de Usuario 1: Registro de Usuario
-**Como nuevo usuario, quiero crear una cuenta en el sistema, para poder iniciar sesión y usar la aplicación.**
+📋 Historias de Usuario
+Aquí te dejo las historias de usuario que desarrollé, cada una con sus criterios bien definidos:
 
-- **Criterios de aceptación:**
-  ✔ Debe permitir ingresar nombre de usuario y contraseña.
-  ✔ Al hacer clic en “Registrar”, debe crearse la cuenta correctamente.
-  ✔ Debe mostrarse un mensaje de confirmación.
+✅ Historia 1: Registro de Usuario
+Como nuevo usuario, quiero registrarme, para poder usar la app.
 
-- **Criterios de rechazo:**
-  ❌ Campos vacíos deben impedir el registro.
-  ❌ Si el nombre de usuario ya existe, debe mostrar un mensaje de error.
+✔ Aceptación: campos completos, registro exitoso, mensaje de confirmación.
 
-### ✅ Historia de Usuario 2: Inicio de Sesión
-**Como usuario registrado, quiero poder iniciar sesión con mi cuenta, para acceder al sistema y registrar vehículos.**
+❌ Rechazo: campos vacíos o usuario ya existente muestran errores.
 
-- **Criterios de aceptación:**
-  ✔ Debe validar las credenciales ingresadas.
-  ✔ Si son correctas, debe redirigir al formulario de vehículos.
+✅ Historia 2: Inicio de Sesión
+Como usuario registrado, quiero iniciar sesión, para acceder al sistema.
 
-- **Criterios de rechazo:**
-  ❌ Si las credenciales son inválidas, debe mostrar un error.
-  ❌ Campos vacíos deben impedir el inicio de sesión.
+✔ Aceptación: credenciales válidas redirigen correctamente.
 
-### ✅ Historia de Usuario 3: Registro de Datos del Vehículo
-**Como usuario autenticado, quiero ingresar los datos de mi vehículo, para tener un registro de sus especificaciones básicas.**
+❌ Rechazo: credenciales inválidas o campos vacíos generan error.
 
-- **Criterios de aceptación:**
-  ✔ Debe permitir ingresar marca, modelo, año, color, placa y tipo.
-  ✔ Al hacer clic en “Siguiente”, debe guardar los datos y avanzar al siguiente paso.
+✅ Historia 3: Registro de Vehículo
+Como usuario logueado, quiero registrar mi vehículo, para guardarlo en el sistema.
 
-- **Criterios de rechazo:**
-  ❌ Si algún campo obligatorio está vacío, no debe avanzar.
-  ❌ Si el año es inválido, debe mostrar un mensaje de error.
+✔ Aceptación: todos los campos llenos permiten avanzar.
 
-### ✅ Historia de Usuario 4: Selección de Características del Vehículo
-**Como usuario, quiero seleccionar características adicionales de mi vehículo, para detallar aún más su información.**
+❌ Rechazo: campos vacíos o año inválido detienen el proceso.
 
-- **Criterios de aceptación:**
-  ✔ Debe mostrar una lista de características para elegir.
-  ✔ Al hacer clic en “Registrar”, debe guardar la selección.
+✅ Historia 4: Características del Vehículo
+Como usuario, quiero seleccionar características, para detallar más mi vehículo.
 
-- **Criterios de rechazo:**
-  ❌ No se debe permitir avanzar si no se selecciona al menos una característica (si aplica).
+✔ Aceptación: selección mínima requerida y guardado correcto.
 
-### ✅ Historia de Usuario 5: Visualización del Resumen y Descarga de PDF
-**Como usuario, quiero ver un resumen de toda la información ingresada y poder descargarla en PDF, para tener un respaldo de los datos del vehículo.**
+❌ Rechazo: sin selección, no debe continuar.
 
-- **Criterios de aceptación:**
-  ✔ Debe mostrar los datos del vehículo y sus características en una tabla.
-  ✔ Al hacer clic en “Descargar PDF”, debe generarse el archivo correctamente.
+✅ Historia 5: Resumen y PDF
+Como usuario, quiero ver y descargar un resumen en PDF, para tener un respaldo.
 
-- **Criterios de rechazo:**
-  ❌ Si no hay datos cargados, no se debe permitir la descarga.
-  ❌ Si el archivo no se genera correctamente, debe mostrar un mensaje de error.
+✔ Aceptación: se muestra resumen, botón descarga funciona.
 
-## Capturas de Pantalla
-Las capturas de pantalla de cada prueba automatizada se generan automáticamente y se almacenan en la carpeta `pruebas/screenshots`. Esto permite auditar visualmente el comportamiento de la aplicación durante las pruebas.
+❌ Rechazo: sin datos cargados o errores en generación del PDF.
 
-## Buenas Prácticas Aplicadas
-- Separación clara entre lógica de pruebas y código fuente.
-- Uso de `assert` para comprobaciones lógicas y validaciones.
-- Generación de reportes HTML para facilitar la revisión.
-- Documentación de todas las historias de usuario con criterios bien definidos.
-- Capturas de pantalla automáticas en escenarios clave.
+🖼️ Capturas de Pantalla
+Las pruebas generan capturas automáticamente en la carpeta pruebas/screenshots. Esto ayuda a validar visualmente qué ocurrió en cada prueba.
 
-## Contribuciones
-Si deseas contribuir a este proyecto:
-1. **Haz un fork del repositorio**
-2. **Crea una nueva rama (`git checkout -b feature-nueva-funcionalidad`)**
-3. **Realiza los cambios y confirma los commits (`git commit -m 'Añadida nueva funcionalidad'`)**
-4. **Sube los cambios (`git push origin feature-nueva-funcionalidad`)**
-5. **Abre un Pull Request en GitHub**
+✅ Buenas Prácticas
+Código organizado y separado.
 
-## Licencia
-Este proyecto está licenciado bajo la Licencia Apache 2.0. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+Validaciones claras con assert.
 
-## Contacto
-Si tienes dudas o sugerencias, puedes comunicarte a través de:
-- GitHub: [smith-ch](https://github.com/smith-ch)
-- Correo Electrónico: [smithrodriguez345@gmail.com]
+Reportes HTML fáciles de revisar.
 
----
-¡Gracias por revisar este proyecto! 🚀
+Documentación de historias de usuario.
+
+Capturas automáticas en escenarios clave.
+
+📚 Información Adicional
+Si deseas ver más detalles técnicos, explicación de flujos, documentación más formal, etc., puedes revisar el archivo PDF incluido en el proyecto. Ahí encontrarás todo organizado de forma estructurada para cumplir con los requerimientos del curso.
 
